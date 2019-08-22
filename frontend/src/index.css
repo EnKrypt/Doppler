@@ -1,3 +1,123 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:500,600');
+@import url('https://fonts.googleapis.com/css?family=Exo:600');
+
 body {
     margin: 0;
+    font-family: 'Dosis';
+    text-align: center;
+    background: #f0f0f0;
+}
+
+.container {
+    width: 60em;
+    margin: 5em auto;
+}
+
+.oops {
+    font-size: 3.5em;
+}
+
+.bigtext {
+    font-size: 2em;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em;
+    background: #101010;
+    color: #f0f0f0;
+    box-shadow: 0 3px 3px #a0a0a0;
+    box-sizing: border-box;
+}
+
+.title img {
+    height: 5em;
+}
+
+.hostname {
+    font-size: 2.2em;
+    color: #60b0ff;
+    font-family: 'Exo';
+}
+
+.platform {
+    font-size: 1.2em;
+}
+
+.os {
+    color: #60b0ff;
+}
+
+.cores {
+    color: #60ff60;
+}
+
+.cpu {
+    color: #ff9400;
+}
+
+.info {
+    padding-top: 1em;
+}
+
+.uptime {
+    font-size: 1.25em;
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+.uptime span {
+    color: #00b040;
+}
+
+.tooltip {
+    height: 1em;
+    padding: 0.5em;
+    background: #ffffff;
+    box-shadow: 2px 2px 2px #a0a0a0;
+    border-radius: 0.2em;
+}
+
+.card {
+    background: #ffffff;
+    padding: 1em 2em;
+    box-shadow: 3px 3px 3px #a0a0a0;
+    border-radius: 0.25em;
+    margin-bottom: 0.5em;
+}
+
+.graph-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0;
+}
+
+.graph-data {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 1.5em;
+}
+
+.graph-name {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.graph-current span {
+    color: #4090f0;
+}
+
+.graph-available span {
+    color: #00b040;
+}
+
+.graph-max span {
+    color: #c04020;
 }
