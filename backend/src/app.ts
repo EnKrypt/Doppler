@@ -3,7 +3,7 @@ import SI from 'systeminformation';
 import cuid from 'cuid';
 
 const pollInterval = 2500;
-const port = 3000;
+const port = 3456;
 
 const app = new Koa();
 
