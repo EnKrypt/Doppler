@@ -1,0 +1,7 @@
+# Installed or generated
+dist/
+node_modules/
+node_modules
+
+# Editor
+.vscode/
