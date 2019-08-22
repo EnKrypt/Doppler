@@ -20,6 +20,19 @@ let processes: SI.Systeminformation.ProcessesData;
 let fsStats: SI.Systeminformation.FsStatsData;
 let network: SI.Systeminformation.NetworkStatsData[];
 
+const history: {
+    cpuTemp: SI.Systeminformation.CpuTemperatureData['cores'][0];
+    cpuLoad: SI.Systeminformation.CurrentLoadData['currentload'];
+    memActive: SI.Systeminformation.MemData['active'];
+    swapUsed: SI.Systeminformation.MemData['swapused'];
+    processes: SI.Systeminformation.ProcessesData['all'];
+    diskUsed: SI.Systeminformation.FsSizeData['used'][];
+    disksIOrbps: SI.Systeminformation.FsStatsData['rx_sec'];
+    disksIOwbps: SI.Systeminformation.FsStatsData['wx_sec'];
+    disksIOtbps: SI.Systeminformation.FsStatsData['tx_sec'];
+    networkbps: SI.Systeminformation.NetworkStatsData['tx_sec'][];
+}[] = [];
+
 app.use(async ctx => {
     if (iterID) {
         const meta = {
@@ -62,7 +75,8 @@ app.use(async ctx => {
                 iface: iface.iface,
                 bps: iface.tx_sec
             })),
-            ...(ctx.request.headers['init'] && { meta: meta })
+            ...(ctx.request.headers['init'] && { meta: meta }),
+            ...(ctx.request.headers['init'] && { history: history })
         };
     } else {
         ctx.body = {
@@ -80,6 +94,22 @@ const poll = async () => {
     processes = await SI.processes();
     fsStats = await SI.fsStats();
     network = await SI.networkStats();
+
+    if (history.length >= 100) {
+        history.shift();
+    }
+    history.push({
+        cpuTemp: Math.max(...cpuTemp.cores),
+        cpuLoad: Math.round(cpuLoad.currentload),
+        memActive: Math.round(mem.active / 1024 / 1024),
+        swapUsed: Math.round(mem.swapused / 1024 / 1024),
+        processes: processes.all,
+        diskUsed: disk.map(disk => Math.round(+disk.used / 1024 / 1024 / 1024)),
+        disksIOrbps: fsStats.rx_sec,
+        disksIOwbps: fsStats.wx_sec,
+        disksIOtbps: fsStats.tx_sec,
+        networkbps: network.map(iface => iface.tx_sec)
+    });
 };
 
 (async () => {
