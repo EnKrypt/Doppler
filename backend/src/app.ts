@@ -1,4 +1,5 @@
 import Koa from 'koa';
+import cors from '@koa/cors';
 import SI from 'systeminformation';
 import cuid from 'cuid';
 
@@ -32,6 +33,8 @@ const history: {
     disksIOtbps: SI.Systeminformation.FsStatsData['tx_sec'];
     networkbps: SI.Systeminformation.NetworkStatsData['tx_sec'][];
 }[] = [];
+
+app.use(cors());
 
 app.use(async ctx => {
     if (iterID) {
