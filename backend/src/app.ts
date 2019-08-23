@@ -26,7 +26,6 @@ const history: {
     cpuLoad: SI.Systeminformation.CurrentLoadData['currentload'];
     memActive: SI.Systeminformation.MemData['active'];
     swapUsed: SI.Systeminformation.MemData['swapused'];
-    processes: SI.Systeminformation.ProcessesData['all'];
     diskUsed: SI.Systeminformation.FsSizeData['used'][];
     disksIOrbps: SI.Systeminformation.FsStatsData['rx_sec'];
     disksIOwbps: SI.Systeminformation.FsStatsData['wx_sec'];
@@ -70,13 +69,13 @@ app.use(async ctx => {
                 used: Math.round(+disk.used / 1024 / 1024 / 1024)
             })),
             disksIO: {
-                rbps: fsStats.rx_sec,
-                wbps: fsStats.wx_sec,
-                tbps: fsStats.tx_sec
+                rbps: Math.round(fsStats.rx_sec / 1024),
+                wbps: Math.round(fsStats.wx_sec / 1024),
+                tbps: Math.round(fsStats.tx_sec / 1024)
             },
             network: network.map(iface => ({
                 iface: iface.iface,
-                bps: iface.tx_sec
+                bps: Math.round(iface.tx_sec / 1024)
             })),
             ...(ctx.request.headers['init'] && { meta: meta }),
             ...(ctx.request.headers['init'] && { history: history })
@@ -106,12 +105,11 @@ const poll = async () => {
         cpuLoad: Math.round(cpuLoad.currentload),
         memActive: Math.round(mem.active / 1024 / 1024),
         swapUsed: Math.round(mem.swapused / 1024 / 1024),
-        processes: processes.all,
         diskUsed: disk.map(disk => Math.round(+disk.used / 1024 / 1024 / 1024)),
-        disksIOrbps: fsStats.rx_sec,
-        disksIOwbps: fsStats.wx_sec,
-        disksIOtbps: fsStats.tx_sec,
-        networkbps: network.map(iface => iface.tx_sec)
+        disksIOrbps: Math.round(fsStats.rx_sec / 1024),
+        disksIOwbps: Math.round(fsStats.wx_sec / 1024),
+        disksIOtbps: Math.round(fsStats.tx_sec / 1024),
+        networkbps: network.map(iface => Math.round(iface.tx_sec / 1024))
     });
 };
 
