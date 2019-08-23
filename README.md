@@ -20,17 +20,17 @@ That won't happen to you or me however, because lucky for us, we know this tool 
 
 ## Wait, what?
 
-Yeah, he almost died. It hurts me to even watch, here I made a gif and everything :
+He almost died, dude. It hurts me to even watch. Here, I made a gif and everything :
 
 ![Poor Helge](https://github.com/EnKrypt/Doppler/raw/master/assets/smash.gif)
 
-Alright, alright, I'm just kidding.
+Alright, fine, I'm just kidding.
 
 ##### On a side note, [Dark](https://www.imdb.com/title/tt5753856/) is a really good show. You should definitely watch it if you haven't.
 
-I'd set up a home server not long ago and I wanted to remotely monitor its CPU temperatures because I wasn't very confident in my TIM application and heatsink installation. However, every solution I found online was either really heavy to begin with, or involved an hour long configuration process.
+I'd set up a home server not long ago and I wanted to remotely monitor the CPU temperatures because I wasn't very confident in my heatsink install. However, every solution I found online was either really heavy to begin with, or involved an hour long configuration process.
 
-I figured it would take me less time to just build a lightweight remote monitoring tool than to try and use one of those.
+I figured it would take me less time to just build a lightweight solution than to try and use one of those.
 
 ## Install
 
@@ -38,7 +38,7 @@ I figured it would take me less time to just build a lightweight remote monitori
 
 There are two separate folders. One for the api `backend`, and another for the React `frontend`.
 
-Go the backend folder.
+Go to the backend folder.
 
 Install dependencies by running `yarn` or `npm install`.
 
@@ -62,7 +62,7 @@ Install dependencies by running `yarn` or `npm install`.
 
 Generate a React build by running `yarn build` or `npm run build`.
 
-Statically serve the generated build.
+Statically serve the generated build. If you've done everything right so far, it should look something like the screenshot below when you open the page.
 
 If you don't plan to run the frontend alongside the backend, make sure you update the endpoint variable `API_URL` in [`App.js`](https://github.com/EnKrypt/Doppler/blob/master/frontend/src/App.js)
 
