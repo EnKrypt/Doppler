@@ -35,6 +35,7 @@ body {
     color: #f0f0f0;
     box-shadow: 0 3px 3px #a0a0a0;
     box-sizing: border-box;
+    z-index: 1;
 }
 
 .title img {
@@ -47,8 +48,27 @@ body {
     font-family: 'Exo';
 }
 
+.hostname a {
+    text-decoration: none;
+}
+
+.hostname a:link,
+.hostname a:visited,
+.hostname a:focus,
+.hostname a:active {
+    color: #60b0ff;
+}
+
 .platform {
     font-size: 1.2em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.title,
+.platform {
+    width: 15em;
 }
 
 .os {
@@ -60,20 +80,26 @@ body {
 }
 
 .cpu {
-    color: #ff9400;
+    color: #908ae8;
 }
 
 .info {
     padding-top: 1em;
 }
 
-.uptime {
+.moving-stats {
     font-size: 1.25em;
-    text-align: left;
-    margin-bottom: 1em;
+    margin: 1em 0 1.5em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .uptime span {
+    color: #00b040;
+}
+
+.processes span {
     color: #00b040;
 }
 
@@ -85,6 +111,14 @@ body {
     border-radius: 0.2em;
 }
 
+.tooltip.multi {
+    height: 3.5em;
+}
+
+.tooltip-line {
+    text-transform: capitalize;
+}
+
 .card {
     background: #ffffff;
     padding: 1em 2em;
@@ -93,10 +127,13 @@ body {
     margin-bottom: 0.5em;
 }
 
+.graph {
+    padding: 1em 0;
+}
+
 .graph-row {
     display: flex;
     justify-content: space-between;
-    margin: 1em 0;
 }
 
 .graph-data {
@@ -120,4 +157,8 @@ body {
 
 .graph-max span {
     color: #c04020;
+}
+
+.graph-left {
+    border-right: solid 1px #f0f0f0;
 }
