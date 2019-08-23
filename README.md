@@ -4,7 +4,7 @@
 
 A 'good enough' remote monitoring solution for the lazy.
 
-##### Note: There are known bugs on Windows and Mac. This is due to [known bugs in the `systeminformation` module](https://github.com/sebhildebrandt/systeminformation#function-reference-and-os-support).
+##### Note: There might be issues running this on Windows. This is due to [known compatibility issues in the `systeminformation` module](https://github.com/sebhildebrandt/systeminformation#function-reference-and-os-support).
 
 ---
 
@@ -12,7 +12,7 @@ A 'good enough' remote monitoring solution for the lazy.
 
 This is Helge Doppler.
 
-[![Helge Doppler](https://github.com/EnKrypt/Doppler/raw/master/assets/helge.png)]
+![Helge Doppler](https://github.com/EnKrypt/Doppler/raw/master/assets/helge.png)
 
 He got his face beat to a pulp by someone else's high school bully because he didn't quite understand how to monitor his own resources over time.
 
@@ -22,11 +22,11 @@ That won't happen to you or me however, because lucky for us, we know this tool 
 
 Yeah, he almost died. It hurts me to even watch, here I made a gif and everything :
 
-[![Poor Helge](https://github.com/EnKrypt/Doppler/raw/master/assets/smash.gif)]
+![Poor Helge](https://github.com/EnKrypt/Doppler/raw/master/assets/smash.gif)
 
-Alright, alright, I'm just kidding. Although this is a real excerpt from a Netflix show called [Dark](https://www.imdb.com/title/tt5753856/).
+Alright, alright, I'm just kidding.
 
-##### Really good show btw, you should definitely watch it if you haven't.
+##### Although this is a real excerpt from a Netflix show called [Dark](https://www.imdb.com/title/tt5753856/). Really good show, you should definitely watch it if you haven't.
 
 I'd set up a home server not long ago and I wanted to remotely monitor its CPU temperatures because I wasn't very confident in my TIM application and heatsink installation. However, every solution I found online was either really heavy to begin with, or involved an hour long configuration process.
 
@@ -74,6 +74,6 @@ I recommend using [Github Pages](https://pages.github.com/) or [Netlify](https:/
 
 ## Usage
 
-This is what it looks like once deployed correctly:
+This is what it looks like when deployed correctly:
 
-[![Helge Doppler](https://github.com/EnKrypt/Doppler/raw/master/assets/screen.png)]
+![Screenshot](https://github.com/EnKrypt/Doppler/raw/master/assets/screen.png)
