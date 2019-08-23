@@ -5,7 +5,7 @@ import Graph from './Graph';
 
 const historyLimit = 100;
 const API_URL = `${window.location.protocol}//${window.location.host}:${
-    window.location.protocol === 'https' ? '8123' : '3456'
+    window.location.protocol === 'https:' ? '8123' : '3456'
 }`;
 
 export default class App extends React.Component {
