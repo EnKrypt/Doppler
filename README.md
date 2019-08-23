@@ -26,7 +26,7 @@ Yeah, he almost died. It hurts me to even watch, here I made a gif and everythin
 
 Alright, alright, I'm just kidding.
 
-##### Although this is a real excerpt from a Netflix show called [Dark](https://www.imdb.com/title/tt5753856/). Really good show, you should definitely watch it if you haven't.
+##### On a side note, [Dark](https://www.imdb.com/title/tt5753856/) is a really good show. You should definitely watch it if you haven't.
 
 I'd set up a home server not long ago and I wanted to remotely monitor its CPU temperatures because I wasn't very confident in my TIM application and heatsink installation. However, every solution I found online was either really heavy to begin with, or involved an hour long configuration process.
 
