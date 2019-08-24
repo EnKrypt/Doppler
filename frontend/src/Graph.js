@@ -32,7 +32,7 @@ export default class Graph extends React.Component {
                     </div>
                     {this.props.available && (
                         <div className="graph-available">
-                            Available:{' '}
+                            Capacity:{' '}
                             <span>
                                 {this.props.available}
                                 {this.props.unit}
@@ -44,7 +44,9 @@ export default class Graph extends React.Component {
                         <span>
                             {Math.max.apply(
                                 null,
-                                this.props.data.map(data => data.val)
+                                this.props.data
+                                    .map(data => data.val)
+                                    .filter(data => !(data == null))
                             )}
                             {this.props.unit}
                         </span>

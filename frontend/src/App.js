@@ -300,7 +300,7 @@ export default class App extends React.Component {
                                                 >
                                                     <Graph
                                                         name={`Disk ${index +
-                                                            1}`}
+                                                            1} Usage`}
                                                         data={
                                                             this.state
                                                                 .diskUsedData[
@@ -315,7 +315,7 @@ export default class App extends React.Component {
                                                         .length ? (
                                                         <Graph
                                                             name={`Disk ${index +
-                                                                2}`}
+                                                                2} Usage`}
                                                             data={
                                                                 this.state
                                                                     .diskUsedData[
