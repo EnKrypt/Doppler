@@ -1,10 +1,16 @@
-[![Doppler Logo](https://github.com/EnKrypt/Doppler/raw/master/assets/Doppler.png)](https://github.com/EnKrypt/Doppler)
+<p align="center">
+    <img width="500" src="https://github.com/EnKrypt/Doppler/raw/master/assets/Doppler.png">
+</p>
+
+<p align="center">
+    <b>A zero configuration remote monitoring tool designed to be better than nothing</b>
+</p>
+
+<br>
 
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://raw.githubusercontent.com/EnKrypt/Doppler/master/LICENSE)
 
-A 'good enough' remote monitoring solution for the lazy.
-
-##### Note: There might be issues running this on Windows. This is due to [known compatibility issues in the `systeminformation` module](https://github.com/sebhildebrandt/systeminformation#function-reference-and-os-support).
+##### Note: If running on Windows, you may have trouble monitoring network or disk I/O. This is due to [known compatibility issues in the `systeminformation` module](https://github.com/sebhildebrandt/systeminformation#function-reference-and-os-support).
 
 ---
 
@@ -32,47 +38,33 @@ I'd set up a home server not long ago and I wanted to remotely monitor the CPU t
 
 I figured it would take me less time to just build a lightweight solution than to try and use one of those.
 
-## Install
-
-##### Right now, the install process involves manual work. If there are community requests and when I have the time, I will work on release management where you can deploy with a single command. Until then, you have my apologies and sympathy.
-
-There are two separate folders. One for the api `backend`, and another for the React `frontend`.
-
-Go to the backend folder.
-
-Install dependencies by running `yarn` or `npm install`.
-
-Either use `ts-node` to run directly :
-
-```bash
-$ ts-node src/app.ts
-```
-
-Or compile and run :
-
-```bash
-$ tsc && node dist/app.js
-```
-
-This will start the backend service. (Default port is `3456`)
-
-Go to the frontend folder.
-
-Install dependencies by running `yarn` or `npm install`.
-
-Generate a React build by running `yarn build` or `npm run build`.
-
-Statically serve the generated build. If you've done everything right so far, it should look something like the screenshot below when you open the page.
-
-If you don't plan to run the frontend alongside the backend, make sure you update the endpoint variable `API_URL` in [`App.js`](https://github.com/EnKrypt/Doppler/blob/master/frontend/src/App.js)
-
-If you intend to use https, port `8123` is set to default. Either keep that open, or change the port.
-
-I recommend using [Github Pages](https://pages.github.com/) or [Netlify](https://www.netlify.com/) if you don't want to manage hosting yourself.
-
-[Caddy](https://caddyserver.com/) is neat if you **do** want to host it yourself.
-
 ## Usage
+
+Download the [latest release](https://github.com/EnKrypt/Doppler/releases/latest) and execute it on the command line.
+
+On linux, you might have to run `chmod +x` and optionally put the binary in your favorite bin folder.
+
+For full help :
+
+```bash
+doppler --help
+```
+
+By default Doppler will run on port `3456` with a polling interval of 2.5 seconds.
+
+These values can be changed using command line arguments. You may specify the port to use with `--port` or `-p`, and you may specify the polling interval with `--interval` or `-i`.
+
+For example :
+
+```bash
+doppler -p 1234 -i 5000
+```
+
+will run Doppler on port `1234` with a polling interval of 5 seconds.
+
+Finally, point your browser to Doppler with the appropriate URL. If running locally with default or no specified options, open [`http://localhost:3456`](http://localhost:3456)
+
+## Preview
 
 This is what it looks like when deployed correctly:
 
