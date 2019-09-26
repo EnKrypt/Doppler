@@ -4,9 +4,7 @@ import React from 'react';
 import Graph from './Graph';
 
 const historyLimit = 100;
-const API_URL = `${window.location.protocol}//${window.location.host}:${
-    window.location.protocol === 'https:' ? '8123' : '3456'
-}`;
+const API_URL = `${window.location.protocol}//${window.location.host}/api`;
 
 export default class App extends React.Component {
     constructor() {
@@ -28,7 +26,8 @@ export default class App extends React.Component {
                 os: {
                     distro: '',
                     hostname: ''
-                }
+                },
+                interval: 2500
             },
             uptime: 'Loading',
             processes: 0,
@@ -70,7 +69,9 @@ export default class App extends React.Component {
                     iterID: init.iterID,
                     memTotal: init.mem.total,
                     swapTotal: init.mem.swaptotal,
-                    diskSize: init.disk.map(disk => disk.size),
+                    diskSize: init.disk
+                        .filter(disk => disk.size)
+                        .map(disk => disk.size),
                     history:
                         init.history.length > historyLimit
                             ? init.history.slice(-historyLimit)
@@ -78,7 +79,7 @@ export default class App extends React.Component {
                 },
                 () => {
                     this.putDataToState(true);
-                    setInterval(this.poll, 2500);
+                    setInterval(this.poll, init.meta.interval);
                 }
             );
         } else if (!this.state.error) {
@@ -256,12 +257,12 @@ export default class App extends React.Component {
                                         data={this.state.cpuTempData}
                                         lines={[
                                             {
-                                                value: 90,
+                                                value: 80,
                                                 text: 'Warn',
                                                 color: '#ffff00'
                                             },
                                             {
-                                                value: 105,
+                                                value: 100,
                                                 text: 'TJ Max',
                                                 color: '#ff0000'
                                             }

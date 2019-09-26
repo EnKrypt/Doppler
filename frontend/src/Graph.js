@@ -30,7 +30,7 @@ export default class Graph extends React.Component {
                             {this.props.unit}
                         </span>
                     </div>
-                    {this.props.available && (
+                    {this.props.available ? (
                         <div className="graph-available">
                             Capacity:{' '}
                             <span>
@@ -38,6 +38,8 @@ export default class Graph extends React.Component {
                                 {this.props.unit}
                             </span>
                         </div>
+                    ) : (
+                        ''
                     )}
                     <div className="graph-max">
                         Max:{' '}
