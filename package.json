@@ -1,11 +1,15 @@
 {
-    "name": "doppler-monitor",
+    "name": "doppler",
     "version": "0.1.0",
     "description": "A zero configuration remote monitoring tool designed to be better than nothing",
     "scripts": {
         "build": "cd backend && rm -rf ./dist && tsc && cd ../frontend && react-scripts build && cp -r ./build ../backend/dist/serve",
         "start": "cd backend && node dist/app.js",
-        "clean": "cd backend && rm -rf node_modules dist && cd ../frontend && rm -rf node_modules build"
+        "clean": "rm -rf release && cd backend && rm -rf node_modules dist && cd ../frontend && rm -rf node_modules build",
+        "package": "cd backend/dist && pkg app.js --out-path ../../release/ --config ../../package.json"
+    },
+    "pkg": {
+        "assets": "backend/dist/serve/**/*"
     },
     "repository": {
         "type": "git",
