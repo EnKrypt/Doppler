@@ -1,12 +1,30 @@
-import Koa from 'koa';
 import cors from '@koa/cors';
-import SI from 'systeminformation';
 import cuid from 'cuid';
+import Koa from 'koa';
+import Router from 'koa-router';
+import serve from 'koa-static';
+import path from 'path';
+import 'source-map-support/register';
+import SI from 'systeminformation';
+import yargs from 'yargs';
 
-const pollInterval = 2500;
-const port = 3456;
+const argv = yargs.options({
+    p: {
+        type: 'number',
+        alias: 'port',
+        describe: 'Port to run Doppler on',
+        default: 3456
+    },
+    i: {
+        type: 'number',
+        alias: 'interval',
+        describe: 'How often to poll (in ms)',
+        default: 2500
+    }
+}).argv;
 
 const app = new Koa();
+const router = new Router();
 
 let iterID = '';
 let system: SI.Systeminformation.SystemData;
@@ -21,6 +39,9 @@ let processes: SI.Systeminformation.ProcessesData;
 let fsStats: SI.Systeminformation.FsStatsData;
 let network: SI.Systeminformation.NetworkStatsData[];
 
+let tempFlag = false;
+let windowsFlag = false;
+
 const history: {
     cpuTemp: SI.Systeminformation.CpuTemperatureData['cores'][0];
     cpuLoad: SI.Systeminformation.CurrentLoadData['currentload'];
@@ -33,9 +54,7 @@ const history: {
     networkbps: SI.Systeminformation.NetworkStatsData['tx_sec'][];
 }[] = [];
 
-app.use(cors());
-
-app.use(async ctx => {
+router.get('/api', async ctx => {
     if (iterID) {
         const meta = {
             motherboard: {
@@ -50,7 +69,8 @@ app.use(async ctx => {
             os: {
                 distro: os.distro,
                 hostname: os.hostname
-            }
+            },
+            interval: argv.i
         };
         ctx.body = {
             iterID: iterID,
@@ -88,14 +108,48 @@ app.use(async ctx => {
 });
 
 const poll = async () => {
-    iterID = cuid();
-    cpuTemp = await SI.cpuTemperature();
     cpuLoad = await SI.currentLoad();
     mem = await SI.mem();
     disk = await SI.fsSize();
     processes = await SI.processes();
-    fsStats = await SI.fsStats();
     network = await SI.networkStats();
+    try {
+        cpuTemp = await SI.cpuTemperature();
+        if (!cpuTemp.cores.length) {
+            throw new Error('Cannot monitor CPU temperature');
+        }
+    } catch (e) {
+        cpuTemp = {
+            main: 0,
+            cores: Array(cpu.cores).fill(0),
+            max: 0
+        };
+        if (!tempFlag) {
+            console.warn(
+                'Cannot pull temperature data. On Linux, make sure `sensors` is available (package: lm-sensors). For OS X, install osx-temperature-sensor. Some CPUs are not supported on Windows.'
+            );
+            tempFlag = true;
+        }
+    }
+    try {
+        fsStats = await SI.fsStats();
+    } catch (e) {
+        fsStats = {
+            rx_bytes: 0,
+            wx_bytes: 0,
+            tx_bytes: 0,
+            rx_sec: 0,
+            wx_sec: 0,
+            tx_sec: 0,
+            ms: 0
+        };
+        if (!windowsFlag) {
+            console.warn(
+                'Your environment is not fully supported. Keep in mind that disk and network I/O will not be monitored.'
+            );
+            windowsFlag = true;
+        }
+    }
 
     if (history.length >= 100) {
         history.shift();
@@ -111,14 +165,22 @@ const poll = async () => {
         disksIOtbps: Math.round(fsStats.tx_sec / 1024),
         networkbps: network.map(iface => Math.round(iface.tx_sec / 1024))
     });
+
+    iterID = cuid();
 };
+
+app.use(cors());
+app.use(serve(path.join(__dirname, 'serve')));
+app.use(router.routes()).use(router.allowedMethods());
 
 (async () => {
     system = await SI.system();
     cpu = await SI.cpu();
     os = await SI.osInfo();
 
-    setInterval(poll, pollInterval);
+    setInterval(poll, argv.i);
 
-    app.listen(port);
+    app.listen(argv.p);
+
+    console.log(`Doppler running on port ${argv.p}`);
 })();
