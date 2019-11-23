@@ -43,7 +43,7 @@ let tempFlag = false;
 let windowsFlag = false;
 
 const history: {
-    cpuTemp: SI.Systeminformation.CpuTemperatureData['cores'][0];
+    cpuTemp: SI.Systeminformation.CpuTemperatureData['max'];
     cpuLoad: SI.Systeminformation.CurrentLoadData['currentload'];
     memActive: SI.Systeminformation.MemData['active'];
     swapUsed: SI.Systeminformation.MemData['swapused'];
@@ -75,7 +75,7 @@ router.get('/api', async ctx => {
         ctx.body = {
             iterID: iterID,
             uptime: SI.time().uptime,
-            cpuTemp: Math.max(...cpuTemp.cores),
+            cpuTemp: Math.round(cpuTemp.max),
             cpuLoad: Math.round(cpuLoad.currentload),
             mem: {
                 total: Math.round(mem.total / 1024 / 1024),
@@ -115,7 +115,7 @@ const poll = async () => {
     network = await SI.networkStats();
     try {
         cpuTemp = await SI.cpuTemperature();
-        if (!cpuTemp.cores.length) {
+        if (cpuTemp.max <= 0) {
             throw new Error('Cannot monitor CPU temperature');
         }
     } catch (e) {
@@ -155,7 +155,7 @@ const poll = async () => {
         history.shift();
     }
     history.push({
-        cpuTemp: Math.max(...cpuTemp.cores),
+        cpuTemp: Math.round(cpuTemp.max),
         cpuLoad: Math.round(cpuLoad.currentload),
         memActive: Math.round(mem.active / 1024 / 1024),
         swapUsed: Math.round(mem.swapused / 1024 / 1024),
