@@ -115,6 +115,9 @@ const poll = async () => {
     network = await SI.networkStats();
     try {
         cpuTemp = await SI.cpuTemperature();
+        if (!cpuTemp.cores.length && cpuTemp.max > 0) {
+            cpuTemp.cores = Array(cpu.cores).fill(cpuTemp.max);
+        }
         if (!cpuTemp.cores.length) {
             throw new Error('Cannot monitor CPU temperature');
         }
