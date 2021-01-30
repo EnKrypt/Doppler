@@ -27,7 +27,7 @@
         "koa-router": "^7.4.0",
         "koa-static": "^5.0.0",
         "source-map-support": "^0.5.13",
-        "systeminformation": "^4.30.5",
+        "systeminformation": "^4.31.1",
         "yargs": "^14.0.0"
     }
 }
