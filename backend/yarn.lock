@@ -160,11 +160,6 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
-"@types/systeminformation@^3.23.1":
-  version "3.23.1"
-  resolved "https://registry.yarnpkg.com/@types/systeminformation/-/systeminformation-3.23.1.tgz#e3bd825691a4e7af35e5aa0e4df77b5c3677ad19"
-  integrity sha512-0/y5m3PQLhQL7UM8MEvwFuLoTT6k5bamcZyjap12S0iHb33ngKfDDqCSnIaCaKWvRE41R/9BsZov1aE6hvcpEg==
-
 "@types/yargs-parser@*":
   version "13.1.0"
   resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-13.1.0.tgz#c563aa192f39350a1d18da36c5a8da382bbd8228"
@@ -2168,10 +2163,10 @@ supports-color@^5.2.0, supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
-systeminformation@^5.6.4:
-  version "5.6.4"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.6.4.tgz#5f32fcb05a5849e2a0e71b182c1f56ce32219310"
-  integrity sha512-b2tvW1R+qjNEoAGgh734EGLgqbDMghjsHRaWo36skAC6JM1tw1pitcGz/REt+qSIRSXbE4PKECojhaSrBRrEmw==
+systeminformation@^5.12.13:
+  version "5.12.13"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.12.13.tgz#5ccdd33824cf735231d2392f254b95b2bdec28c2"
+  integrity sha512-2z1Ul+PDkO50yGmEGKWOPk3+TeAtTkbn6PmxqzH9D3BAN53QXgbYy6+PPJmBrszXy+X7g8uwZd1WdThKZtICcg==
 
 tar@^4:
   version "4.4.19"
