@@ -1,6 +1,6 @@
 {
     "name": "doppler",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A zero configuration remote monitoring tool designed to be better than nothing",
     "scripts": {
         "build": "cd backend && rm -rf ./dist && tsc && cd ../frontend && react-scripts build && cp -r ./build ../backend/dist/serve",

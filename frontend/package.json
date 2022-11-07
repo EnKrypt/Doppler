@@ -1,6 +1,6 @@
 {
     "name": "doppler-frontend",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
     "dependencies": {
         "date-fns": "^2.0.0",
